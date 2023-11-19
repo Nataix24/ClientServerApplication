@@ -6,10 +6,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Scanner;
+
+
 
 public class ClientLogics {
 
@@ -34,7 +35,6 @@ public class ClientLogics {
         //check needs to be done for SERVER and PORT.
         if(!clientData.get("ip").toString().replace(" ","").equals("localhost")){
             System.out.println("Incorrect Server Connection");
-
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -56,8 +56,6 @@ public class ClientLogics {
             myObj.nextLine();
             System.exit(1);
         }
-
-
 
         System.out.println("Attempting Login..");
         WebClient webClient = WebClient.create();
@@ -86,13 +84,13 @@ public class ClientLogics {
             }
         }
         else {
-            System.out.println("Response: " + responseBody);//idk what to do? do we stop? depends on the response. this is for signing in.
+            System.out.println("Response: " + responseBody); //idk what to do? do we stop? depends on the response. this is for signing in.
         }
 
         System.out.println("Signing Up..");
 
 
-        // login then if account doesnt exist then sign up then login.
+        // login then if account does not exist then sign up then login.
 
         //clientData.get("ip").toString().replace(" ","")+":"+clientData.get("port").toString().replace(" ","")
 

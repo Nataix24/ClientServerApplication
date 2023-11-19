@@ -1,5 +1,6 @@
 package compsec.JsonRelated;
 
+import compsec.clientserverapplication.Client;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,6 +9,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JsonLogics {
@@ -20,6 +22,8 @@ public class JsonLogics {
         String port="";
         String delay="";
         JSONParser parser = new JSONParser();
+        ArrayList<String> actionsAL = new ArrayList<>();
+
         try {
             Object obj = parser.parse(new FileReader(clientJsonLocation));
 
@@ -47,9 +51,11 @@ public class JsonLogics {
             int counter = 1;
             for (Object step : stepsArray) {
                 String actionStep = (String) step;
+                actionsAL.add(actionStep);
                 stringHashMap.put("action" + counter,actionStep);
                 counter++;
             }
+
 
 
         } catch (FileNotFoundException e) {
@@ -59,6 +65,10 @@ public class JsonLogics {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        Client c = new Client(stringHashMap.get("id"), stringHashMap.get("password"), stringHashMap.get("counter"), stringHashMap.get("server"), stringHashMap.get("port"), actionsAL);
+
+
         return stringHashMap;
     }
 }

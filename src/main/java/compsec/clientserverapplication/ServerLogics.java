@@ -41,7 +41,7 @@ public class ServerLogics {
         return HttpServletResponse.SC_UNAUTHORIZED;
     }
     @PostMapping("/counter")
-    public int counter(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public int counter(@RequestParam(value = "id", defaultValue = "value") String name) {
 
         //logic
 
