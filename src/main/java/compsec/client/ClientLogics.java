@@ -1,6 +1,6 @@
 package compsec.client;
 
-import compsec.JsonRelated.JsonLogics;
+import compsec.clientserverapplication.JsonLogics;
 import compsec.clientserverapplication.ServerLogics;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -11,40 +11,36 @@ import java.util.ArrayList;
 @SpringBootApplication
 @RestController
 public class ServerLogics {
-    ArrayList<Client> clientList = new ArrayList<Client>();
-
+    ArrayList<Client> clients = new ArrayList<>();
     public static void main(String[] args) {
         SpringApplication.run(ServerLogics.class, args);
     }
-    @GetMapping("/hello")
-    public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return String.format("Hello %s!", name);
-    }
-    @PostMapping("/signup")
-    public int signUp(@RequestParam(value = "id") String id,@RequestParam(value = "password") String password) {
 
-        //logic
-        System.out.println("id:"+id);
-        System.out.println("password:"+password);
+    @PostMapping("/recieve")
+    public int signUp(@RequestParam(value = "json") String json) {
+        JsonLogics parse = new JsonLogics();
+        clients.add(parse.readFile(json));
 
         return HttpServletResponse.SC_OK;
     }
-    @PostMapping("/login")
-    public int signIn(@RequestParam(value = "id") String id,@RequestParam(value = "password") String password) {
-        //hash password here (.equalss(HASH(password)))
-        for (Client c: clientList) {
-            if(c.getId().equals(id)&&c.getId().equals(password)){
-                return HttpServletResponse.SC_OK;
-            }
+
+    public void execute(Client client) {
+        Thread newThread = new Thread(new tasks(client));
+        newThread.start();
+    }
+    public class tasks implements Runnable {
+        Client client;
+        public tasks(Client client){
+            this.client = client;
         }
 
-        return HttpServletResponse.SC_UNAUTHORIZED;
+        @Override
+        public void run() {
+            
+            throw new UnsupportedOperationException("Unimplemented method 'run'");
+        }
+        
     }
-    @PostMapping("/counter")
-    public int counter(@RequestParam(value = "id", defaultValue = "value") String name) {
 
-        //logic
-
-        return HttpServletResponse.SC_OK;
-    }
+   
 }
