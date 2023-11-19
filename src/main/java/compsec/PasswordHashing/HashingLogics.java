@@ -8,7 +8,7 @@ import java.security.spec.KeySpec;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-public class CypherPassword {
+public class HashingLogics {
 
     // Pepper is global, should be static
     private static final String PEPPER = "R3d_H0t_Ch1ll1_P3pp3R";
@@ -16,7 +16,7 @@ public class CypherPassword {
     private byte[] salt;
     private String hashedPassword;
 
-    public CypherPassword(String rawPassword){
+    public HashingLogics(String rawPassword){
         this.salt = generateSalt();
         this.hashedPassword = hash(rawPassword, this.salt);
     }
@@ -72,7 +72,7 @@ public class CypherPassword {
     public static void main(String[] args) {
         String originalRaw = "MyCoolPasswordHaha";
 
-        CypherPassword cypher = new CypherPassword(originalRaw);
+        HashingLogics cypher = new HashingLogics(originalRaw);
         byte[] salt = cypher.getSalt();
         String hashedOriginal = cypher.getHashedPassword();
         

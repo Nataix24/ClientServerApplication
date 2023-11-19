@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class JsonLogics {
 
-    public HashMap readFile() {
+    public HashMap readFile(String clientJsonLocation) {
         HashMap<String,String> stringHashMap = new HashMap<>();
         String password="";
         String id="";
@@ -21,7 +21,7 @@ public class JsonLogics {
         String delay="";
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("src/main/resources/test.json"));
+            Object obj = parser.parse(new FileReader(clientJsonLocation));
 
             JSONObject jsonObject = (JSONObject) obj;
             id = (String) jsonObject.get(" id ");

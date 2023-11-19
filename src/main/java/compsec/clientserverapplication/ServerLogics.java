@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class demo {
+public class ServerLogics {
     public static void main(String[] args) {
-        SpringApplication.run(demo.class, args);
+        SpringApplication.run(ServerLogics.class, args);
     }
     @GetMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
@@ -21,21 +21,23 @@ public class demo {
     public int signUp(@RequestParam(value = "id") String id,@RequestParam(value = "password") String password) {
 
         //logic
+        System.out.println("id:"+id);
+        System.out.println("password:"+password);
 
-        return HttpServletResponse.SC_ACCEPTED;
+        return HttpServletResponse.SC_OK;
     }
     @PostMapping("/signin")
     public int signIn(@RequestParam(value = "id") String id,@RequestParam(value = "password") String password) {
 
         //logic
 
-        return HttpServletResponse.SC_ACCEPTED;
+        return HttpServletResponse.SC_OK;
     }
     @PostMapping("/counter")
     public int counter(@RequestParam(value = "name", defaultValue = "World") String name) {
 
         //logic
 
-        return HttpServletResponse.SC_ACCEPTED;
+        return HttpServletResponse.SC_OK;
     }
 }
