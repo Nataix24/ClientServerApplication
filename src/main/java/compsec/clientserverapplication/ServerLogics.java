@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 
 @SpringBootApplication
 @RestController
 public class ServerLogics {
+    ArrayList<Client> clientList = new ArrayList<Client>();
+
     public static void main(String[] args) {
         SpringApplication.run(ServerLogics.class, args);
     }
@@ -26,12 +29,16 @@ public class ServerLogics {
 
         return HttpServletResponse.SC_OK;
     }
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public int signIn(@RequestParam(value = "id") String id,@RequestParam(value = "password") String password) {
+        //hash password here (.equalss(HASH(password)))
+        for (Client c: clientList) {
+            if(c.getId().equals(id)&&c.getId().equals(password)){
+                return HttpServletResponse.SC_OK;
+            }
+        }
 
-        //logic
-
-        return HttpServletResponse.SC_OK;
+        return HttpServletResponse.SC_UNAUTHORIZED;
     }
     @PostMapping("/counter")
     public int counter(@RequestParam(value = "name", defaultValue = "World") String name) {
