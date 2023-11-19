@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class JsonLogics {
 
-    public HashMap readFile(String clientJsonLocation) {
+    public Client readFile(String clientJsonLocation) {
         HashMap<String,String> stringHashMap = new HashMap<>();
         String password="";
         String id="";
@@ -66,9 +66,6 @@ public class JsonLogics {
             e.printStackTrace();
         }
 
-        Client c = new Client(stringHashMap.get("id"), stringHashMap.get("password"), stringHashMap.get("counter"), stringHashMap.get("server"), stringHashMap.get("port"), actionsAL);
-
-
-        return stringHashMap;
+        return new Client(stringHashMap.get("id"), stringHashMap.get("password"), stringHashMap.get("counter"), stringHashMap.get("server"), stringHashMap.get("port"), actionsAL, stringHashMap.get("delay"));
     }
 }

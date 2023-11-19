@@ -14,13 +14,16 @@ public class Client {
 
     private ArrayList<String> actionList;
 
-    public Client(String id, String password, String counter, String server, String port, ArrayList<String> actionList) {
+    private String delay;
+
+    public Client(String id, String password, String counter, String server, String port, ArrayList<String> actionList, String delay) {
         this.id = id;
         this.password = password;
         this.counter = counter;
         this.server = server;
         this.port = port;
         this.actionList = actionList;
+        this.delay = delay;
     }
 
     public String getCounter() {
@@ -69,6 +72,14 @@ public class Client {
 
     public void setServer(String server) {
         this.server = server;
+    }
+
+    public String getDelay() {
+        return delay;
+    }
+
+    public void setDelay(String delay) {
+        this.delay = delay;
     }
 }
 
