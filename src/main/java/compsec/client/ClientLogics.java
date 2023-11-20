@@ -33,10 +33,15 @@ public class ClientLogics {
             Scanner input = new Scanner(System.in);
 
             System.out.println("Enter the path to the JSON client file or type exit:");
-            String file = input.nextLine();
+            String file = "halt";
+            if (input.hasNextLine()){
+                 file = input.nextLine();
+            }
             if(file.equals("exit")){
                 exit= true;
-            }else{
+            }
+            else{
+                exit= true;
                 File myObj = new File(file);
                 Scanner myReader = new Scanner(myObj);
                 String data = "";
