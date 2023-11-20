@@ -26,23 +26,21 @@ public class ServerLogics {
 
     @PostMapping("/receive")
     public int signUp(@RequestBody String json) throws ParseException {
-
-        System.out.println(clients.toString());
-
         JsonLogics parse = new JsonLogics();
         HashMap<String,String> clientCurrent = parse.readFile(json);
         Client c= parse.hashToClient(parse.readFile(json));
         for (String s: clients.keySet()) { //case sensitive?
             if(clientCurrent.get("id").replace(" ","").equals(s.replace(" ",""))&&clientCurrent.get("password").replace(" ","").equals(clients.get(s))){
+                System.out.println("inside");
                 c.setCounter(Logger.mostRecentCounter(clientCurrent.get("id").replace(" ","")));
                 execute(c);
                 return HttpServletResponse.SC_OK;
             }
-            else if (clientCurrent.get("id").replace(" ","").equals(s)){
-                return HttpServletResponse.SC_UNAUTHORIZED;
+            if (clientCurrent.get("id").replace(" ","").equals(s.replace(" ",""))&&
+                    !clientCurrent.get("password").replace(" ","").equals(clients.get(s))){
+                return 401;
             }
         }
-
         clients.put(clientCurrent.get("id"),clientCurrent.get("password"));
         execute(c);
         return HttpServletResponse.SC_OK;
@@ -83,8 +81,6 @@ public class ServerLogics {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("counter after actions:"+client.getCounter());
-
             }
         }
     }

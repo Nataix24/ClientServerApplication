@@ -1,0 +1,22 @@
+{
+  "id" : " Josh " ,
+  "password" : " Coolpassword! " ,
+  "server" :
+  {
+    "ip" : "http://localhost" ,
+    "port" : "8080"
+  } ,
+  "actions" : {
+    "delay" : " 3 " ,
+    "steps" : [
+      "DECREASE 50" ,
+      "INCREASE 100",
+      "DECREASE 600" ,
+      "INCREASE 9999",
+      "DECREASE 9999" ,
+      "INCREASE 1",
+      "DECREASE 10000" ,
+      "INCREASE 68"
+    ]
+  }
+}

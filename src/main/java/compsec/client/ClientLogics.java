@@ -78,7 +78,6 @@ public class ClientLogics {
             }
             input.close();
         }
-//        start(filePath);
     }
 
 }

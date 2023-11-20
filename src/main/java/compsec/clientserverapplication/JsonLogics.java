@@ -55,8 +55,6 @@ public class JsonLogics {
             counter++;
         }
 
-        System.out.println(stepsList);
-
         return stringHashMap;
     }
 
