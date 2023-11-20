@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+
 
 @SpringBootApplication
 @RestController
@@ -22,9 +25,9 @@ public class ServerLogics {
     @PostMapping("/recieve")
     public int signUp(@RequestBody String json) throws ParseException {
         JsonLogics parse = new JsonLogics();
-        parse.readFile(json);
+        HashMap<String,String> client  = parse.readFile(json);
         //clients.add();
-
+      
         return HttpServletResponse.SC_OK;
     }
 
