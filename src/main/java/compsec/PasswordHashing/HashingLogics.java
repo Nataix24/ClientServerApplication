@@ -4,6 +4,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Arrays;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -17,7 +18,7 @@ public class HashingLogics {
     private String hashedPassword;
 
     public HashingLogics(String rawPassword){
-        this.salt = generateSalt();
+        this.salt = new byte[]{-38, -69, -23, -119, 1, 38, 69, -52, 113, -122, 39, -95, 102, -1, 59, 126};
         this.hashedPassword = hash(rawPassword, this.salt);
     }
     public byte[] getSalt(){
@@ -78,6 +79,11 @@ public class HashingLogics {
         
         String testRaw = "MyCoolPasswordHaha";
         boolean match = verifyPassword(testRaw, hashedOriginal, salt);
+
+        SecureRandom random = new SecureRandom();
+        byte[] saltArr = new byte[16];
+        random.nextBytes(saltArr);
+        System.out.println(Arrays.toString(saltArr));
 
         System.out.println("Raw stored:     " + originalRaw);
         System.out.println("Raw input:      " + testRaw);

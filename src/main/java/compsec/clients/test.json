@@ -9,8 +9,8 @@
   "actions" : {
     "delay" : " 1 " ,
     "steps" : [
-      "ACTION 1" ,
-      "ACTION 2"
+      "DECREASE 1" ,
+      "INCREASE 2"
     ]
   }
 }

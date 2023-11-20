@@ -8,11 +8,15 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class JsonLogics {
 
+    private ArrayList<String> stepsList;
     public HashMap<String,String> readFile(String json) throws ParseException {
+        stepsList = new ArrayList<>();
         HashMap<String, String> stringHashMap = new HashMap<>();
         String password = "";
         String id = "";
@@ -33,7 +37,7 @@ public class JsonLogics {
         // Retrieve "ip" and "port" values
         ip = (String) server.get("ip");
         port = (String) server.get("port");
-        stringHashMap.put("ip", ip);
+        stringHashMap.put("ip", ip.replace(" ",""));
         stringHashMap.put("port", port);
         Object actionsObject = jsonObject.get("actions");
         JSONObject actions = (JSONObject) actionsObject;
@@ -47,10 +51,17 @@ public class JsonLogics {
         for (Object step : stepsArray) {
             String actionStep = (String) step;
             stringHashMap.put("action" + counter, actionStep);
+            stepsList.add(actionStep);
             counter++;
         }
 
+        System.out.println(stepsList);
+
         return stringHashMap;
+    }
+
+    public Client hashToClient(HashMap<String,String> hashMap){
+        return new Client(hashMap.get("id"), hashMap.get("password"), 0L, hashMap.get("ip"), hashMap.get("port"),stepsList, hashMap.get("delay"));
     }
 
 }

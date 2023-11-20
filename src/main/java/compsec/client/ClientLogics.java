@@ -70,7 +70,7 @@ public class ClientLogics {
                 HashMap<String,String> parsedData = parser.readFile(data);
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(parsedData.get("ip")+":"+parsedData.get("port")+"/recieve"))
+                .uri(URI.create(parsedData.get("ip")+":"+parsedData.get("port")+"/receive"))
                 .POST(HttpRequest.BodyPublishers.ofString(data))
                 .build();
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());

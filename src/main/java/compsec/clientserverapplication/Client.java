@@ -5,28 +5,19 @@ import java.util.ArrayList;
 
 public class Client {
     private String id;
-    private String password;
-    private String counter;
-
-    private String server;
-
-    private String port;
-
+    private Long counter;
     private ArrayList<String> actionList;
 
     private String delay;
 
-    public Client(String id, String password, String counter, String server, String port, ArrayList<String> actionList, String delay) {
+    public Client(String id, String password, Long counter, String ip, String port, ArrayList<String> actionList, String delay) {
         this.id = id;
-        this.password = password;
         this.counter = counter;
-        this.server = server;
-        this.port = port;
         this.actionList = actionList;
         this.delay = delay;
     }
 
-    public String getCounter() {
+    public Long getCounter() {
         return counter;
     }
 
@@ -34,44 +25,20 @@ public class Client {
         return id;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setCounter(String counter) {
+    public void setCounter(Long counter) {
         this.counter = counter;
     }
 
     public void setId(String id) {
         this.id = id;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
     public ArrayList<String> getActionList() {
         return actionList;
     }
 
-    public String getServer() {
-        return server;
-    }
-
     public void setActionList(ArrayList<String> actionList) {
         this.actionList = actionList;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
-
-    public void setServer(String server) {
-        this.server = server;
     }
 
     public String getDelay() {
@@ -80,6 +47,16 @@ public class Client {
 
     public void setDelay(String delay) {
         this.delay = delay;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id='" + id + '\'' +
+                ", counter=" + counter +
+                ", actionList=" + actionList +
+                ", delay='" + delay + '\'' +
+                '}';
     }
 }
 
