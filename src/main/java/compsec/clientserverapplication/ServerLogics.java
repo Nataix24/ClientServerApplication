@@ -1,9 +1,12 @@
 package compsec.clientserverapplication;
 import jakarta.servlet.http.HttpServletResponse;
+
+import org.json.simple.parser.ParseException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
@@ -17,9 +20,10 @@ public class ServerLogics {
     }
 
     @PostMapping("/recieve")
-    public int signUp(@RequestParam(value = "json") String json) {
+    public int signUp(@RequestBody String json) throws ParseException {
         JsonLogics parse = new JsonLogics();
-        clients.add(parse.readFile(json));
+        parse.readFile(json);
+        //clients.add();
 
         return HttpServletResponse.SC_OK;
     }

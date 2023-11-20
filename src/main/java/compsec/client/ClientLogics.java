@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -26,14 +27,13 @@ import java.util.concurrent.ExecutionException;
 
 
 public class ClientLogics {
-    public static void main(String[] args) throws FileNotFoundException, ParseException, InterruptedException, ExecutionException {
+    public static void main(String[] args) throws ParseException, InterruptedException, ExecutionException, IOException {
         boolean exit = false;
         while(!exit){
-
             Scanner input = new Scanner(System.in);
+
             System.out.println("Enter the path to the JSON client file or type exit:");
             String file = input.nextLine();
-            input.close();
             if(file.equals("exit")){
                 exit= true;
             }else{
@@ -54,20 +54,24 @@ public class ClientLogics {
                 }
                 data = "";
                 for (int i = 0; i < splitData.length; i++) {
-                    data += splitData[i];
+                    if(i == splitData.length - 1) {
+                        data += splitData[i];
+                    }else{
+                        data += splitData[i]+"\"";
+                    }
                 }
 
                 JsonLogics parser = new JsonLogics();
                 HashMap<String,String> parsedData = parser.readFile(data);
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(parsedData.get("ip")+":"+parsedData.get("port")))
+                .uri(URI.create(parsedData.get("ip")+":"+parsedData.get("port")+"/recieve"))
                 .POST(HttpRequest.BodyPublishers.ofString(data))
                 .build();
-                CompletableFuture<HttpResponse<String>> futureResponse = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
-                HttpResponse<String> response = futureResponse.get();
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 System.out.println(response.statusCode());
             }
+            input.close();
         }
 //        start(filePath);
     }
