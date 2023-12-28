@@ -47,6 +47,10 @@ public class HashingLogics {
 
     // Hash the password given salt
     public static String hash(String rawPassword, byte[] salt) {
+
+        if (rawPassword == "") {
+            throw new IllegalArgumentException("Oopsie cannot have empty password 0_0");
+        }
         try {
             rawPassword += PEPPER;
             KeySpec spec = new PBEKeySpec(rawPassword.toCharArray(), salt, 65536, 128);

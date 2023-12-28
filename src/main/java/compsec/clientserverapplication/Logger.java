@@ -6,6 +6,10 @@ public class Logger {
 
     public static void update(String id, String counter){
 
+        if (Integer.parseInt(counter) < 0) {
+            throw new IllegalArgumentException("Choose a positive value for counter!");
+        }
+        
         File log = new File(""+id+"Log.txt");
         try{
             if(!log.exists()){
