@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class JsonLogics {
 
     private ArrayList<String> stepsList;
-    public HashMap<String,String> readFile(String json) throws ParseException {
+    public HashMap<String,String> readFile(String json) {
         stepsList = new ArrayList<>();
         HashMap<String, String> stringHashMap = new HashMap<>();
         String password = "";
@@ -24,8 +24,14 @@ public class JsonLogics {
         String port = "";
         String delay = "";
         JSONParser parser = new JSONParser();
-        Object obj = parser.parse(json);
-
+        Object obj = null;
+        try {
+             obj = parser.parse(json);
+            
+        } catch (Exception e) {
+            System.out.println("The file is in the incorrect format");
+            return null;
+        }
         JSONObject jsonObject = (JSONObject) obj;
         id = (String) jsonObject.get("id");
         stringHashMap.put("id", id);

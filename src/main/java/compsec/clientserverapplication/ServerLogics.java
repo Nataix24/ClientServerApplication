@@ -28,6 +28,9 @@ public class ServerLogics {
     public int signUp(@RequestBody String json) throws ParseException {
         JsonLogics parse = new JsonLogics();
         HashMap<String,String> clientCurrent = parse.readFile(json);
+        if(clientCurrent == null){
+            return HttpServletResponse.SC_BAD_REQUEST;
+        }
         Client c= parse.hashToClient(parse.readFile(json));
         for (String s: clients.keySet()) { //case sensitive?
             if(clientCurrent.get("id").replace(" ","").equals(s.replace(" ",""))&&clientCurrent.get("password").replace(" ","").equals(clients.get(s))){

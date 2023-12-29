@@ -68,6 +68,9 @@ public class ClientLogics {
 
                 JsonLogics parser = new JsonLogics();
                 HashMap<String,String> parsedData = parser.readFile(data);
+                if(parsedData == null){
+                    return;
+                }
                 HttpClient client = HttpClient.newHttpClient();
                 HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(parsedData.get("ip")+":"+parsedData.get("port")+"/receive"))
