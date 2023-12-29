@@ -35,7 +35,7 @@ public class ServerLogics {
         for (String s: clients.keySet()) { //case sensitive?
             if(clientCurrent.get("id").replace(" ","").equals(s.replace(" ",""))&&clientCurrent.get("password").replace(" ","").equals(clients.get(s))){
                 System.out.println("inside");
-                c.setCounter(Logger.mostRecentCounter(clientCurrent.get("id").replace(" ","")));
+                c.setCounter(0L);
                 execute(c);
                 return HttpServletResponse.SC_OK;
             }
