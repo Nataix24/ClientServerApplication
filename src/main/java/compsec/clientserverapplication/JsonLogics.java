@@ -52,13 +52,17 @@ public class JsonLogics {
             String actionStep = (String) step;
             try {
                 // validate if it's an integer
-                Integer.parseInt(actionStep.substring(9));
+                int amount = Integer.parseInt(actionStep.substring(9));
+                if (amount <= 0) {
+                    throw new IllegalArgumentException("Choose a positive value for counter!");
+                }
                 stringHashMap.put("action" + counter, actionStep);
                 stepsList.add(actionStep);
                 counter++;
             }
             catch(NumberFormatException e) {
                 System.out.println("You need to input an integer!");
+                return null;
             }
         }
 

@@ -60,11 +60,11 @@ public class HashingLogics {
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Oopsie with getting algorithm instance 0_0");
             e.printStackTrace();
-            return "ERROR_1";
+            return null;
         } catch (InvalidKeySpecException e) {
             System.out.println("Oopsie with generating the hashed password 0_0");
             e.printStackTrace();
-            return "ERROR_2";
+            return null;
         }
     }
 

@@ -54,6 +54,9 @@ public class ClientLogics {
                     if(splitData[i].equals("password")){
                         int index = i+2;
                         HashingLogics hash = new HashingLogics(splitData[index]);
+                        if (hash.getHashedPassword() == null) {
+                            return;
+                        }
                         splitData[index] = hash.getHashedPassword();
                     }
                 }
