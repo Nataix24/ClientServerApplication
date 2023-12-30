@@ -56,9 +56,20 @@ public class JsonLogics {
         int counter = 1;
         for (Object step : stepsArray) {
             String actionStep = (String) step;
-            stringHashMap.put("action" + counter, actionStep);
-            stepsList.add(actionStep);
-            counter++;
+            try {
+                // validate if it's an integer
+                int amount = Integer.parseInt(actionStep.substring(9));
+                if (amount <= 0) {
+                    throw new IllegalArgumentException("Choose a positive value for counter!");
+                }
+                stringHashMap.put("action" + counter, actionStep);
+                stepsList.add(actionStep);
+                counter++;
+            }
+            catch(NumberFormatException e) {
+                System.out.println("You need to input an integer!");
+                return null;
+            }
         }
 
         return stringHashMap;

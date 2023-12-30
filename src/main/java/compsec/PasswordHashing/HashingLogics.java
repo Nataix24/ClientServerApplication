@@ -47,6 +47,10 @@ public class HashingLogics {
 
     // Hash the password given salt
     public static String hash(String rawPassword, byte[] salt) {
+
+        if (rawPassword == "") {
+            throw new IllegalArgumentException("Oopsie cannot have empty password 0_0");
+        }
         try {
             rawPassword += PEPPER;
             KeySpec spec = new PBEKeySpec(rawPassword.toCharArray(), salt, 65536, 128);
@@ -56,11 +60,11 @@ public class HashingLogics {
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Oopsie with getting algorithm instance 0_0");
             e.printStackTrace();
-            return "ERROR_1";
+            return null;
         } catch (InvalidKeySpecException e) {
             System.out.println("Oopsie with generating the hashed password 0_0");
             e.printStackTrace();
-            return "ERROR_2";
+            return null;
         }
     }
 

@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class Logger {
 
     public static void update(String id, String counter){
-
+        
         File log = new File(""+id+"Log.txt");
         try{
             if(!log.exists()){
